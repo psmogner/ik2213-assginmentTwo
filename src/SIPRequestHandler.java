@@ -4,6 +4,7 @@ public class SIPRequestHandler {
 	private SIPSession currentSIPSession;
 	private String temporaryString, secondTemporaryString, ringingResponse, okMessage;
 	private String[] stringArray;
+	private final static String CRLF = "\r\n";
 
 	public SIPRequestHandler(){
 		currentSIPSession = new SIPSession();
@@ -31,6 +32,7 @@ public class SIPRequestHandler {
 				System.out.println("<< Gathered info from FROM string");
 				temporaryString = null;
 				stringArray = null;
+			} else if(inputString.startsWith("To:")){
 			} else if(inputString.startsWith("Call-ID:")){
 				currentSIPSession.setCallID(inputString);
 				System.out.println("<< Gathered info from CALL-ID string");
@@ -88,7 +90,7 @@ public class SIPRequestHandler {
 		ringingResponse += "To: <"+currentSIPSession.getTo()+">\r\n";
 		ringingResponse += currentSIPSession.getCallID()+"\r\n";
 		ringingResponse += currentSIPSession.getCSeq()+" "+currentSIPSession.getCSeqAttribute()+"\r\n";
-		ringingResponse += currentSIPSession.getContact()+"\r\n";
+		ringingResponse += "<"+currentSIPSession.getTo()+">\r\n";
 		ringingResponse += currentSIPSession.getUserAgent()+"\r\n";
 		ringingResponse += "Content-Length: "+currentSIPSession.getContentLength()+"\r\n\r\n";
 
@@ -98,31 +100,32 @@ public class SIPRequestHandler {
 	}
 
 	public String okMessage(){
-		okMessage = "SIP/2.0 200 OK\r\n";
-		okMessage += currentSIPSession.getVia()+"\r\n";
-		okMessage += "From: "+currentSIPSession.getFrom()+";tag=647225198\r\n";
-		okMessage += "To: "+currentSIPSession.getTo()+";"+currentSIPSession.getFromTag()+"\r\n";
-		okMessage += currentSIPSession.getCallID()+"\r\n";
+		okMessage = "SIP/2.0 200 OK" + CRLF;
+		okMessage += currentSIPSession.getVia() + CRLF;
+		okMessage += "From: "+currentSIPSession.getFrom()+";tag=647225198" + CRLF;
+		okMessage += "To: "+currentSIPSession.getTo()+";"+currentSIPSession.getFromTag() + CRLF;
+		okMessage += currentSIPSession.getCallID() + CRLF;
 //		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\r\n";
-		okMessage += currentSIPSession.getCSeq() +" OPTIONS\r\n";
-		okMessage += currentSIPSession.getAllow()+"\r\n";
-		okMessage += "Accept: "+currentSIPSession.getContentType()+"\r\n";
-		okMessage += currentSIPSession.getUserAgent()+"\r\n";
-		okMessage += currentSIPSession.getContentLength()+"\r\n\r\n";
-		okMessage += "v=0";
-		okMessage += currentSIPSession.getOwner()+"";
-		okMessage += "s=Talk";
-		okMessage += currentSIPSession.getConnection();
-		okMessage += currentSIPSession.getTimeDescription();
-		okMessage += currentSIPSession.getMediaDescription();
-		okMessage += "a=rtpmap:112 speex/32000";
-		okMessage += "a=fmtp:112 vbr=on";
-		okMessage += "a=rtpmap:111 speex/16000";
-		okMessage += "a=fmtp:111 vbr=on";
-		okMessage += "a=rtpmap:110 speex/8000";
-		okMessage += "a=fmtp:110 vbr=on";
-		okMessage += "a=rtpmap:101 telephone-event/8000";
-		okMessage += "a=fmtp:101 0-11";
+		okMessage += currentSIPSession.getCSeq() +" INVITE" + CRLF;
+		okMessage += currentSIPSession.getAllow() + CRLF;
+		okMessage += "Accept: "+currentSIPSession.getContentType() + CRLF;
+		okMessage += currentSIPSession.getUserAgent() + CRLF;
+		okMessage += currentSIPSession.getContentLength() + CRLF + CRLF;
+		//=================================================================
+		okMessage += "v=0" + CRLF;
+		okMessage += currentSIPSession.getOwner() + CRLF;
+		okMessage += "s=Talk" + CRLF;
+		okMessage += currentSIPSession.getConnection() + CRLF;
+		okMessage += currentSIPSession.getTimeDescription() + CRLF;
+		okMessage += currentSIPSession.getMediaDescription() + CRLF;
+		okMessage += "a=rtpmap:112 speex/32000" + CRLF;
+		okMessage += "a=fmtp:112 vbr=on" + CRLF;
+		okMessage += "a=rtpmap:111 speex/16000" + CRLF;
+		okMessage += "a=fmtp:111 vbr=on" + CRLF;
+		okMessage += "a=rtpmap:110 speex/8000" + CRLF;
+		okMessage += "a=fmtp:110 vbr=on" + CRLF;
+		okMessage += "a=rtpmap:101 telephone-event/8000" + CRLF;
+		okMessage += "a=fmtp:101 0-11" + CRLF;
 		
 		System.out.println("\r\n<< OK response created = \r\n\r\n"+ okMessage);
 		return okMessage; 
