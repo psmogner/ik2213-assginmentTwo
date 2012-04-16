@@ -20,42 +20,37 @@ public class SIPHandler extends Thread{
 
 
 		String inputData = new String(receivePacket.getData());
-		//		 System.out.println(sentence);
-
 		SIPRequestHandler handler = new SIPRequestHandler();
-
-		System.out.println(inputData + "\n");
 		
 		// Store the length of the data for later use.
-//		int	lengthOfData = inputData.split("\r\n|\r|\n").length;
 		System.out.println(inputData + ".\n");
-		inputData = inputData.replace("\n\n", "hej");
-//		System.out.println("NY:" + inputData + ".\n");
 		String [] splitInputData = inputData.split("\r\n|\r|\n");
 		
-		
-		System.out.println(splitInputData.length);
-		
-		
-		int real_length = 0;
-		
-		for(int i=0; i<splitInputData.length;i++){
-			if(splitInputData[i].equals("") == true){
-				real_length = i;
-				break;
+		if(inputData.startsWith("INVITE") == true  ){ // Fyll pŒ med alla commands
+			System.out.println("Command check");
+			
+			for(int i=0; i<splitInputData.length; i++){
+				if(splitInputData[i].equals("") == false){
+					handler.inputHandler(splitInputData[i]);					
+				}
+//				System.out.println(splitInputData[i]);
 			}
-		}			
-		for(int i=0; i<=real_length; i++){
-			handler.inputHandler(splitInputData[i]);
-			System.out.println(splitInputData[i]);
+			System.out.println("Innan anrop till outputhandler");
+			String outputData = handler.outputHandler();
+			System.out.println("OUTPUTDATA:" + outputData);
+			DatagramPacket sendPacket = new DatagramPacket(outputData.getBytes(), outputData.length(), receivePacket.getAddress(), receivePacket.getPort());
+			try {
+				socket.send(sendPacket);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}else{
+			
 		}
-		String outputData = handler.outputHandler();
-		DatagramPacket sendPacket = new DatagramPacket(outputData.getBytes(), outputData.length(), receivePacket.getAddress(), receivePacket.getPort());
-		try {
-			socket.send(sendPacket);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+
 	}
 
 }
