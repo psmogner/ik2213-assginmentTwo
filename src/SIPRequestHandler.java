@@ -109,9 +109,9 @@ public class SIPRequestHandler {
 		okMessage += "Accept: "+currentSIPSession.getContentType()+"\n";
 		okMessage += currentSIPSession.getUserAgent()+"\n";
 		okMessage += currentSIPSession.getContentLength()+"\n\n";
-		okMessage += "v=0\r";
-		okMessage += currentSIPSession.getOwner()+"\r";
-		okMessage += "s=Talk\r";
+		okMessage += "v=0";
+		okMessage += currentSIPSession.getOwner()+"";
+		okMessage += "s=Talk";
 		okMessage += currentSIPSession.getConnection();
 		okMessage += currentSIPSession.getTimeDescription();
 		okMessage += currentSIPSession.getMediaDescription();
