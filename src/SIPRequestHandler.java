@@ -78,7 +78,7 @@ public class SIPRequestHandler {
 	}
 
 	public String RingingResponse(){
-		ringingResponse = "STP/2.0 180 Ringing\n";
+		ringingResponse = "SIP/2.0 180 Ringing\n";
 		ringingResponse += currentSIPSession.getVia()+"\n";
 		ringingResponse += "From: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
 		ringingResponse += "To: <"+currentSIPSession.getTo()+">\n";
