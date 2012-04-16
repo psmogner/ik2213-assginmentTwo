@@ -24,10 +24,10 @@ public class SIPHandler extends Thread{
 		
 		// Store the length of the data for later use.
 		System.out.println(inputData + ".\n");
-		String [] splitInputData = inputData.split("\r\n|\r|\n");
 		
 		if(inputData.startsWith("INVITE") == true  ){ // Fyll på med alla commands
 			System.out.println("Command check");
+			String [] splitInputData = inputData.split("\r\n|\r|\n");
 			
 			for(int i=0; i<splitInputData.length; i++){
 				if(splitInputData[i].equals("") == false){
