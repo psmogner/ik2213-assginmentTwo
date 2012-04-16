@@ -100,7 +100,7 @@ public class SIPRequestHandler {
 	public String okMessage(){
 		okMessage = "SIP/2.0 200 OK\n";
 		okMessage += currentSIPSession.getVia()+"\n";
-		okMessage += "From: <"+currentSIPSession.getFrom()+">;tag=6477225198\n";
+		okMessage += "From: "+currentSIPSession.getFrom()+";tag=647225198\n";
 		okMessage += "To: "+currentSIPSession.getTo()+";"+currentSIPSession.getFromTag()+"\n";
 		okMessage += currentSIPSession.getCallID()+"\n";
 //		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
@@ -109,9 +109,9 @@ public class SIPRequestHandler {
 		okMessage += "Accept: "+currentSIPSession.getContentType()+"\n";
 		okMessage += currentSIPSession.getUserAgent()+"\n";
 		okMessage += currentSIPSession.getContentLength()+"\n\n";
-		okMessage += "v=0";
-		okMessage += currentSIPSession.getOwner();
-		okMessage += "s=Talk";
+		okMessage += "v=0\r";
+		okMessage += currentSIPSession.getOwner()+"\r";
+		okMessage += "s=Talk\r";
 		okMessage += currentSIPSession.getConnection();
 		okMessage += currentSIPSession.getTimeDescription();
 		okMessage += currentSIPSession.getMediaDescription();
