@@ -18,49 +18,58 @@ public class SIPRequestHandler {
 				stringArray = inputString.split(" ");
 				currentSIPSession.setTo(stringArray[1]);
 				stringArray = null;
+				System.out.println("<< Gathered info from INVITE string");
 			}
 			else if(inputString.startsWith("Via:")){
 				currentSIPSession.setVia(inputString);
+				System.out.println("<< Gathered info from VIA string");
 			}
 			else if(inputString.startsWith("From:")){
 				stringArray = inputString.split(" ");
 				temporaryString = stringArray[1];
 				currentSIPSession.setFrom(temporaryString.split(";")[0]);
 				currentSIPSession.setFromTag(temporaryString.split(";")[1]);
+				System.out.println("<< Gathered info from FROM string");
 				temporaryString = null;
 				stringArray = null;
 			}
 			else if(inputString.startsWith("Call-ID:")){
 				currentSIPSession.setCallID(inputString);
+				System.out.println("<< Gathered info from CALL-ID string");
 			}
 			else if(inputString.startsWith("CSeq:")){
 				stringArray = inputString.split(" ");
 				temporaryString = stringArray[0] +" "+ stringArray[1];
 				currentSIPSession.setCSeq(temporaryString);
 				currentSIPSession.setCSeqAttribute(stringArray[2]);
+				System.out.println("<< Gathered info from CSEQ string");
 				temporaryString = null;
 				stringArray = null;
 			}
 			else if(inputString.startsWith("Content-Type: ")){
 				temporaryString = inputString.split(" ")[1];
 				currentSIPSession.setContentType(temporaryString);
+				System.out.println("<< Gathered info from CONTENT-TYPE string");
 				temporaryString = null;
 			}
 			else if(inputString.startsWith("Allow: ")){
 				currentSIPSession.setAllow(inputString);
+				System.out.println("<< Gathered info from ALLOW string");
 			}
 			else if(inputString.startsWith("Contact: ")){
 				currentSIPSession.setContact(inputString);
+				System.out.println("<< Gathered info from CONTACT string");
 			}
 			else if(inputString.startsWith("UserAgent: ")){
 				currentSIPSession.setUserAgent(inputString);
+				System.out.println("<< Gathered info from USER-AGENT string");
 			}
 		}
 		return "";
 	}
 
 	public String outputHandler() {
-		if(currentSIPSession.equals("INVITE")){
+		if(currentSIPSession.getStatus().equals("INVITE")){
 			RingingResponse();
 			return ringingResponse;
 			
