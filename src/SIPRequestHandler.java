@@ -87,7 +87,7 @@ public class SIPRequestHandler {
 		ringingResponse += currentSIPSession.getCSeq()+" "+currentSIPSession.getCSeqAttribute()+"\n";
 		ringingResponse += currentSIPSession.getContact()+"\n";
 		ringingResponse += currentSIPSession.getUserAgent()+"\n";
-		ringingResponse += "Content-Length: 0\n";
+		ringingResponse += "Content-Length: 0\n\n";
 
 		System.out.println("\n<< RINGING response created = \n\n"+ ringingResponse);
 		return ringingResponse;
@@ -97,7 +97,7 @@ public class SIPRequestHandler {
 	public String okMessage(){
 		okMessage = "SIP/2.0 200 OK\n";
 		okMessage += currentSIPSession.getVia()+"\n";
-		okMessage += "From: <"+currentSIPSession.getTo()+">\n";
+		okMessage += "From: <"+currentSIPSession.getTo()+">;tag=6477225198\n";
 		okMessage += "To: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
 		okMessage += currentSIPSession.getCallID()+"\n";
 //		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
