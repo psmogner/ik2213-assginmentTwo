@@ -27,6 +27,9 @@ public class SIPHandler extends Thread{
 		
 		if(inputData.startsWith("INVITE") == true  ){ // Fyll på med alla commands
 			System.out.println("Command check");
+			System.out.println(inputData);
+			
+			
 			String [] splitInputData = inputData.split("\r\n|\r|\n");
 			
 			for(int i=0; i<splitInputData.length; i++){
@@ -35,18 +38,26 @@ public class SIPHandler extends Thread{
 				}
 //				System.out.println(splitInputData[i]);
 			}
-			System.out.println("Innan anrop till outputhandler");
 			String outputData = handler.outputHandler();
-			System.out.println("OUTPUTDATA:" + outputData);
-			DatagramPacket sendPacket = new DatagramPacket(outputData.getBytes(), outputData.length(), receivePacket.getAddress(), receivePacket.getPort());
+			
+			String ringingMessage = handler.RingingResponse();
+			String okMessage = handler.okMessage();
+			
+		
+			
+			DatagramPacket sendPacket = new DatagramPacket(ringingMessage.getBytes(), ringingMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
 			try {
 				socket.send(sendPacket);
-				System.out.println("Paketer bör vara skickat!!!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
+			sendPacket = new DatagramPacket(okMessage.getBytes(), okMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
+			try {
+				socket.send(sendPacket);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+					
 		}else{
 			System.out.println("I else i slutet do nothing!");
 		}
