@@ -2,7 +2,7 @@
 public class SIPRequestHandler {
 
 	private SIPSession currentSIPSession;
-	private String temporaryString, ringingResponse, okMessage;
+	private String temporaryString, secondTemporaryString, ringingResponse, okMessage;
 	private String[] stringArray;
 
 	public SIPRequestHandler(){
@@ -19,13 +19,11 @@ public class SIPRequestHandler {
 				currentSIPSession.setTo(stringArray[1]);
 				stringArray = null;
 				System.out.println("<< Gathered info from STATUS string");
-			}
-			else if(inputString.startsWith("Via:")){
+			} else if(inputString.startsWith("Via:")){
 				inputString = inputString.replace("rport", "rport=5060");
 				currentSIPSession.setVia(inputString);
 				System.out.println("<< Gathered info from VIA string");
-			}
-			else if(inputString.startsWith("From:")){
+			} else if(inputString.startsWith("From:")){
 				stringArray = inputString.split(" ");
 				temporaryString = stringArray[1];
 				currentSIPSession.setFrom(temporaryString.split(";")[0]);
@@ -33,12 +31,10 @@ public class SIPRequestHandler {
 				System.out.println("<< Gathered info from FROM string");
 				temporaryString = null;
 				stringArray = null;
-			}
-			else if(inputString.startsWith("Call-ID:")){
+			} else if(inputString.startsWith("Call-ID:")){
 				currentSIPSession.setCallID(inputString);
 				System.out.println("<< Gathered info from CALL-ID string");
-			}
-			else if(inputString.startsWith("CSeq:")){
+			} else if(inputString.startsWith("CSeq:")){
 				stringArray = inputString.split(" ");
 				temporaryString = stringArray[0] +" "+ stringArray[1];
 				currentSIPSession.setCSeq(temporaryString);
@@ -46,24 +42,30 @@ public class SIPRequestHandler {
 				System.out.println("<< Gathered info from CSEQ string");
 				temporaryString = null;
 				stringArray = null;
-			}
-			else if(inputString.startsWith("Content-Type: ")){
+			} else if(inputString.startsWith("Content-Type: ")){
 				temporaryString = inputString.split(" ")[1];
 				currentSIPSession.setContentType(temporaryString);
 				System.out.println("<< Gathered info from CONTENT-TYPE string");
 				temporaryString = null;
-			}
-			else if(inputString.startsWith("Allow: ")){
+			} else if(inputString.startsWith("Allow: ")){
 				currentSIPSession.setAllow(inputString);
 				System.out.println("<< Gathered info from ALLOW string");
-			}
-			else if(inputString.startsWith("Contact: ")){
+			} else if(inputString.startsWith("Contact: ")){
 				currentSIPSession.setContact(inputString);
 				System.out.println("<< Gathered info from CONTACT string");
-			}
-			else if(inputString.startsWith("User-Agent: ")){
+			} else if(inputString.startsWith("User-Agent: ")){
 				currentSIPSession.setUserAgent(inputString);
 				System.out.println("<< Gathered info from USER-AGENT string");
+			} else if(inputString.startsWith("Content-Length:")){
+				currentSIPSession.setContentLength(inputString.split(" ")[1]);
+			} else if(inputString.startsWith("o=")){
+				currentSIPSession.setOwner(inputString);
+			} else if(inputString.startsWith("c=")){
+				currentSIPSession.setConnection(inputString);
+			} else if(inputString.startsWith("t=")){
+				currentSIPSession.setTimeDescription(inputString);
+			} else if(inputString.startsWith("m=")){
+				currentSIPSession.setMediaDescription(inputString);
 			}
 		}
 		return "";
@@ -87,7 +89,7 @@ public class SIPRequestHandler {
 		ringingResponse += currentSIPSession.getCSeq()+" "+currentSIPSession.getCSeqAttribute()+"\n";
 		ringingResponse += currentSIPSession.getContact()+"\n";
 		ringingResponse += currentSIPSession.getUserAgent()+"\n";
-		ringingResponse += "Content-Length: 0\n\n";
+		ringingResponse += "Content-Length: "+currentSIPSession.getContentLength()+"\n\n";
 
 		System.out.println("\n<< RINGING response created = \n\n"+ ringingResponse);
 		return ringingResponse;
@@ -105,9 +107,25 @@ public class SIPRequestHandler {
 		okMessage += currentSIPSession.getAllow()+"\n";
 		okMessage += "Accept: "+currentSIPSession.getContentType()+"\n";
 		okMessage += currentSIPSession.getUserAgent()+"\n";
-		okMessage += "Content-Length: 0\n\n";
+		okMessage += "Content-Length: "+currentSIPSession.getContentLength()+"\n\n";
 
+		okMessage += "v=0\n";
+		okMessage += currentSIPSession.getOwner()+"\n";
+		okMessage += "s=Talk\n";
+		okMessage += currentSIPSession.getConnection()+"\n";
+		okMessage += currentSIPSession.getTimeDescription()+"\n";
+		okMessage += currentSIPSession.getMediaDescription()+"\n";
+		okMessage += "a=rtpmap:112 speex/32000\n";
+		okMessage += "a=fmtp:112 vbr=on\n";
+		okMessage += "a=rtpmap:111 speex/16000\n";
+		okMessage += "a=fmtp:111 vbr=on\n";
+		okMessage += "a=rtpmap:110 speex/8000\n";
+		okMessage += "a=fmtp:110 vbr=on\n";
+		okMessage += "a=rtpmap:101 telephone-event/8000\n";
+		okMessage += "a=fmtp:101 0-11\n";
+		
 		System.out.println("\n<< OK response created = \n\n"+ okMessage);
+		secondTemporaryString = null;
 		return okMessage; 
 	}
 

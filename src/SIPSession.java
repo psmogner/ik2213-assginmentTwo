@@ -13,6 +13,11 @@ public class SIPSession {
 	private String allow;
 	private String userAgent;
 	private String CSeqAttribute;
+	private String contentLength;
+	private String Owner;
+	private String Connection;
+	private String TimeDescription;
+	private String MediaDescription;
 
 	public SIPSession(){
 		
@@ -113,5 +118,44 @@ public class SIPSession {
 	public void setCSeqAttribute(String cSeqAttribute) {
 		CSeqAttribute = cSeqAttribute;
 	}
-	
+
+	public String getContentLength() {
+		return contentLength;
+	}
+
+	public void setContentLength(String contentLength) {
+		this.contentLength = contentLength;
+	}
+
+	public String getOwner() {
+		return Owner;
+	}
+
+	public void setOwner(String owner) {
+		Owner = owner;
+	}
+
+	public String getConnection() {
+		return Connection;
+	}
+
+	public void setConnection(String connection) {
+		Connection = connection;
+	}
+
+	public String getTimeDescription() {
+		return TimeDescription;
+	}
+
+	public void setTimeDescription(String timeDescription) {
+		TimeDescription = timeDescription;
+	}
+
+	public String getMediaDescription() {
+		return MediaDescription;
+	}
+
+	public void setMediaDescription(String mediaDescription) {
+		MediaDescription = mediaDescription;
+	}
 }
