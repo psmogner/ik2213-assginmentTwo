@@ -32,7 +32,7 @@ public class SIPSpeaker implements Runnable{
 			}
 		//	System.out.println("packet" + receivePacket.getLength());
 			
-			new SIPHandler(receivePacket).start();
+			new SIPHandler(receivePacket, serverSocket).start();
 			
 			
 			
