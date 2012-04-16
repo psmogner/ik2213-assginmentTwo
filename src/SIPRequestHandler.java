@@ -69,7 +69,7 @@ public class SIPRequestHandler {
 	}
 
 	public String outputHandler() {
-		if(currentSIPSession.getStatus().equals("INVITE")){
+		if(currentSIPSession.getStatus().equalsIgnoreCase("INVITE")){
 			RingingResponse();
 			return ringingResponse;
 			
