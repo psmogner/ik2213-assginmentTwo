@@ -34,7 +34,7 @@ public class SIPRequestHandler {
 				currentSIPSession.setCallID(inputString);
 			}
 			else if(inputString.startsWith("CSeq:")){
-				stringArray = temporaryString.split(" ");
+				stringArray = inputString.split(" ");
 				temporaryString = stringArray[0] +" "+ stringArray[1];
 				currentSIPSession.setCSeq(temporaryString);
 				currentSIPSession.setCSeqAttribute(stringArray[2]);
@@ -83,7 +83,7 @@ public class SIPRequestHandler {
 
 		System.out.println("<< RINGING response created = \n"+ ringingResponse);
 		return ringingResponse;
-
+		
 	}
 
 	public String okMessage(){
