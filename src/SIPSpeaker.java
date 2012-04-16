@@ -8,36 +8,45 @@ import java.net.SocketException;
 public class SIPSpeaker implements Runnable{
 
 	public static void main(String[] args){
-		System.out.println("It is on!");
+		System.out.println("The server is now running!");
 		DatagramSocket serverSocket = null;
 		try {
-			serverSocket = new DatagramSocket(5060);
+			serverSocket = new DatagramSocket(7070);
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		byte [] receiveData = new byte[1024];
-		byte[] sendData = new byte[1024];
+//		byte[] sendData = new byte[1024];
+			
+		
        while(true)
           {
              DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
              try {
-            	 System.out.println("Innan receive");
+            	// System.out.println("Innan receive");
 				serverSocket.receive(receivePacket);
-				System.out.println("Efter receive");
+			//	System.out.println("Efter receive");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("packet" + receivePacket.getLength());
+		//	System.out.println("packet" + receivePacket.getLength());
+			
+			new SIPHandler(receivePacket).start();
 			
 			
-             String sentence = new String( receivePacket.getData());
-             System.out.println("RECEIVED: " + sentence);
-             InetAddress IPAddress = receivePacket.getAddress();
-             int port = receivePacket.getPort();
-             String capitalizedSentence = sentence.toUpperCase();
-             sendData = capitalizedSentence.getBytes();
+			
+			
+			
+			
+//             String sentence = new String( receivePacket.getData());
+//             System.out.println("RECEIVED: " + sentence);
+//             InetAddress IPAddress = receivePacket.getAddress();
+//             int port = receivePacket.getPort();
+//             String capitalizedSentence = sentence.toUpperCase();
+//             sendData = capitalizedSentence.getBytes();
+             
+             
 //             DatagramPacket sendPacket =
 //             new DatagramPacket(sendData, sendData.length, IPAddress, port);
 //             serverSocket.send(sendPacket);
