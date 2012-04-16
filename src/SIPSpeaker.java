@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 
-public class SIPSpeaker implements Runnable{
+public class SIPSpeaker{
 
 	public static void main(String[] args){
 		System.out.println("The server is now running!");
@@ -53,11 +53,6 @@ public class SIPSpeaker implements Runnable{
           }
 		
 		
-		
-	}
-
-	@Override
-	public void run() {
 		
 	}
 }

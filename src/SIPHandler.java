@@ -23,7 +23,7 @@ public class SIPHandler extends Thread{
 		SIPRequestHandler handler = new SIPRequestHandler();
 		
 		// Store the length of the data for later use.
-		System.out.println(inputData + ".\n");
+//		System.out.println(inputData + ".\n");
 		
 		if(inputData.startsWith("INVITE") == true  ){ // Fyll på med alla commands
 			System.out.println("Command check");
@@ -41,13 +41,14 @@ public class SIPHandler extends Thread{
 			DatagramPacket sendPacket = new DatagramPacket(outputData.getBytes(), outputData.length(), receivePacket.getAddress(), receivePacket.getPort());
 			try {
 				socket.send(sendPacket);
+				System.out.println("Paketer bör vara skickat!!!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
 			
 		}else{
-			
+			System.out.println("I else i slutet do nothing!");
 		}
 		
 
