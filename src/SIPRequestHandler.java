@@ -57,7 +57,7 @@ public class SIPRequestHandler {
 				currentSIPSession.setUserAgent(inputString);
 				System.out.println("<< Gathered info from USER-AGENT string");
 			} else if(inputString.startsWith("Content-Length:")){
-				currentSIPSession.setContentLength(inputString.split(" ")[1]);
+				currentSIPSession.setContentLength(inputString);
 				System.out.println("<< Gathered info from CONTENT-LENGTH string");
 			} else if(inputString.startsWith("o=")){
 				currentSIPSession.setOwner(inputString);
@@ -108,8 +108,7 @@ public class SIPRequestHandler {
 		okMessage += currentSIPSession.getAllow()+"\n";
 		okMessage += "Accept: "+currentSIPSession.getContentType()+"\n";
 		okMessage += currentSIPSession.getUserAgent()+"\n";
-		okMessage += "Content-Length: "+currentSIPSession.getContentLength()+"\n\n";
-
+		okMessage += currentSIPSession.getContentLength()+"\n\n";
 		okMessage += "v=0\n";
 		okMessage += currentSIPSession.getOwner()+"\n";
 		okMessage += "s=Talk\n";
