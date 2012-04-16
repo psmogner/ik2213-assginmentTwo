@@ -25,12 +25,18 @@ public class SIPSpeaker{
              try {
             	// System.out.println("Innan receive");
 				serverSocket.receive(receivePacket);
+//				receivePacket.
 			//	System.out.println("Efter receive");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		//	System.out.println("packet" + receivePacket.getLength());
+			
+			System.out.println("Packet source: " + receivePacket.getSocketAddress());
+			System.out.println("Adr source: " + receivePacket.getAddress());
+			
+//			System.out.println("Packet source: " + receivePacket.);
 			
 			new SIPHandler(receivePacket, serverSocket).start();
 			
