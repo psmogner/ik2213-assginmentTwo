@@ -21,6 +21,7 @@ public class SIPRequestHandler {
 				System.out.println("<< Gathered info from STATUS string");
 			}
 			else if(inputString.startsWith("Via:")){
+				inputString = inputString.replace("rport", "rport=5060");
 				currentSIPSession.setVia(inputString);
 				System.out.println("<< Gathered info from VIA string");
 			}
@@ -96,7 +97,7 @@ public class SIPRequestHandler {
 	public String okMessage(){
 		okMessage = "SIP/2.0 200 OK\n";
 		okMessage += currentSIPSession.getVia()+"\n";
-		okMessage += "From: "+currentSIPSession.getTo()+">\n";
+		okMessage += "From: <"+currentSIPSession.getTo()+">\n";
 		okMessage += "To: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
 		okMessage += currentSIPSession.getCallID()+"\n";
 //		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
