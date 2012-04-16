@@ -18,7 +18,7 @@ public class SIPRequestHandler {
 				stringArray = inputString.split(" ");
 				currentSIPSession.setTo(stringArray[1]);
 				stringArray = null;
-				System.out.println("<< Gathered info from INVITE string");
+				System.out.println("<< Gathered info from STATUS string");
 			}
 			else if(inputString.startsWith("Via:")){
 				currentSIPSession.setVia(inputString);
@@ -78,9 +78,7 @@ public class SIPRequestHandler {
 	}
 
 	public String RingingResponse(){
-		ringingResponse = null;
-		
-		ringingResponse += "STP/2.0 180 Ringing\n";
+		ringingResponse = "STP/2.0 180 Ringing\n";
 		ringingResponse += currentSIPSession.getVia()+"\n";
 		ringingResponse += "From: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
 		ringingResponse += "To: <"+currentSIPSession.getTo()+">\n";
@@ -96,9 +94,7 @@ public class SIPRequestHandler {
 	}
 
 	public String okMessage(){
-		okMessage = null;
-		
-		okMessage += "SIP/2.0 200 OK\n";
+		okMessage = "SIP/2.0 200 OK\n";
 		okMessage += currentSIPSession.getVia()+"\n";
 		okMessage += "From: "+currentSIPSession.getTo()+">\n";
 		okMessage += "To: <"+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
