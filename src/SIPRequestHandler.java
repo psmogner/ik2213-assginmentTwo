@@ -97,13 +97,14 @@ public class SIPRequestHandler {
 		okMessage = "SIP/2.0 200 OK\n";
 		okMessage += currentSIPSession.getVia()+"\n";
 		okMessage += "From: "+currentSIPSession.getTo()+">\n";
-		okMessage += "To: <"+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
+		okMessage += "To: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
 		okMessage += currentSIPSession.getCallID()+"\n";
-		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
+//		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
+		okMessage += currentSIPSession.getCSeq() +" OPTIONS\n";
 		okMessage += currentSIPSession.getAllow()+"\n";
 		okMessage += "Accept: "+currentSIPSession.getContentType()+"\n";
 		okMessage += currentSIPSession.getUserAgent()+"\n";
-		okMessage += "Content-Length: 0\n";
+		okMessage += "Content-Length: 0\n\n";
 
 		System.out.println("\n<< OK response created = \n\n"+ okMessage);
 		return okMessage; 
