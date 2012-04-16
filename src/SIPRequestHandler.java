@@ -97,8 +97,8 @@ public class SIPRequestHandler {
 	public String okMessage(){
 		okMessage = "SIP/2.0 200 OK\n";
 		okMessage += currentSIPSession.getVia()+"\n";
-		okMessage += "From: <"+currentSIPSession.getTo()+">;tag=6477225198\n";
-		okMessage += "To: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
+		okMessage += "From: <"+currentSIPSession.getFrom()+">;tag=6477225198\n";
+		okMessage += "To: "+currentSIPSession.getTo()+";"+currentSIPSession.getFromTag()+"\n";
 		okMessage += currentSIPSession.getCallID()+"\n";
 //		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
 		okMessage += currentSIPSession.getCSeq() +" OPTIONS\n";
