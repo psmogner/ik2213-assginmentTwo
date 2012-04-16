@@ -1,14 +1,18 @@
+import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 
 
 public class SIPHandler extends Thread{
 	private DatagramPacket receivePacket;
+	private DatagramSocket socket;
 
 
 
-	public SIPHandler(DatagramPacket receivePacket){
+	public SIPHandler(DatagramPacket receivePacket, DatagramSocket socket){
 		System.out.println("New thread started");
 		this.receivePacket = receivePacket;
+		this.socket = socket;
 	}
 
 	public void run(){
@@ -45,7 +49,13 @@ public class SIPHandler extends Thread{
 			handler.inputHandler(splitInputData[i]);
 			System.out.println(splitInputData[i]);
 		}
-		handler.outputHandler("");
+		String outputData = handler.outputHandler();
+		DatagramPacket sendPacket = new DatagramPacket(outputData.getBytes(), outputData.length(), receivePacket.getAddress(), receivePacket.getPort());
+		try {
+			socket.send(sendPacket);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
