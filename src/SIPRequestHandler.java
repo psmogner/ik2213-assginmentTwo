@@ -82,33 +82,33 @@ public class SIPRequestHandler {
 	}
 
 	public String RingingResponse(){
-		ringingResponse = "SIP/2.0 180 Ringing\n";
-		ringingResponse += currentSIPSession.getVia()+"\n";
-		ringingResponse += "From: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
-		ringingResponse += "To: <"+currentSIPSession.getTo()+">\n";
-		ringingResponse += currentSIPSession.getCallID()+"\n";
-		ringingResponse += currentSIPSession.getCSeq()+" "+currentSIPSession.getCSeqAttribute()+"\n";
-		ringingResponse += currentSIPSession.getContact()+"\n";
-		ringingResponse += currentSIPSession.getUserAgent()+"\n";
-		ringingResponse += "Content-Length: "+currentSIPSession.getContentLength()+"\n\n";
+		ringingResponse = "SIP/2.0 180 Ringing\r\n";
+		ringingResponse += currentSIPSession.getVia()+"\r\n";
+		ringingResponse += "From: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\r\n";
+		ringingResponse += "To: <"+currentSIPSession.getTo()+">\r\n";
+		ringingResponse += currentSIPSession.getCallID()+"\r\n";
+		ringingResponse += currentSIPSession.getCSeq()+" "+currentSIPSession.getCSeqAttribute()+"\r\n";
+		ringingResponse += currentSIPSession.getContact()+"\r\n";
+		ringingResponse += currentSIPSession.getUserAgent()+"\r\n";
+		ringingResponse += "Content-Length: "+currentSIPSession.getContentLength()+"\r\n\r\n";
 
-		System.out.println("\n<< RINGING response created = \n\n"+ ringingResponse);
+		System.out.println("\r\n<< RINGING response created = \r\n\r\n"+ ringingResponse);
 		return ringingResponse;
 		
 	}
 
 	public String okMessage(){
-		okMessage = "SIP/2.0 200 OK\n";
-		okMessage += currentSIPSession.getVia()+"\n";
-		okMessage += "From: "+currentSIPSession.getFrom()+";tag=647225198\n";
-		okMessage += "To: "+currentSIPSession.getTo()+";"+currentSIPSession.getFromTag()+"\n";
-		okMessage += currentSIPSession.getCallID()+"\n";
-//		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\n";
-		okMessage += currentSIPSession.getCSeq() +" OPTIONS\n";
-		okMessage += currentSIPSession.getAllow()+"\n";
-		okMessage += "Accept: "+currentSIPSession.getContentType()+"\n";
-		okMessage += currentSIPSession.getUserAgent()+"\n";
-		okMessage += currentSIPSession.getContentLength()+"\n\n";
+		okMessage = "SIP/2.0 200 OK\r\n";
+		okMessage += currentSIPSession.getVia()+"\r\n";
+		okMessage += "From: "+currentSIPSession.getFrom()+";tag=647225198\r\n";
+		okMessage += "To: "+currentSIPSession.getTo()+";"+currentSIPSession.getFromTag()+"\r\n";
+		okMessage += currentSIPSession.getCallID()+"\r\n";
+//		okMessage += currentSIPSession.getCSeq() +" "+currentSIPSession.getCSeqAttribute()+"\r\n";
+		okMessage += currentSIPSession.getCSeq() +" OPTIONS\r\n";
+		okMessage += currentSIPSession.getAllow()+"\r\n";
+		okMessage += "Accept: "+currentSIPSession.getContentType()+"\r\n";
+		okMessage += currentSIPSession.getUserAgent()+"\r\n";
+		okMessage += currentSIPSession.getContentLength()+"\r\n\r\n";
 		okMessage += "v=0";
 		okMessage += currentSIPSession.getOwner()+"";
 		okMessage += "s=Talk";
@@ -124,7 +124,7 @@ public class SIPRequestHandler {
 		okMessage += "a=rtpmap:101 telephone-event/8000";
 		okMessage += "a=fmtp:101 0-11";
 		
-		System.out.println("\n<< OK response created = \n\n"+ okMessage);
+		System.out.println("\r\n<< OK response created = \r\n\r\n"+ okMessage);
 		return okMessage; 
 	}
 
