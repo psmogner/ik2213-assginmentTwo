@@ -60,7 +60,7 @@ public class SIPRequestHandler {
 				currentSIPSession.setContact(inputString);
 				System.out.println("<< Gathered info from CONTACT string");
 			}
-			else if(inputString.startsWith("UserAgent: ")){
+			else if(inputString.startsWith("User-Agent: ")){
 				currentSIPSession.setUserAgent(inputString);
 				System.out.println("<< Gathered info from USER-AGENT string");
 			}
@@ -83,12 +83,12 @@ public class SIPRequestHandler {
 		ringingResponse += "From: "+currentSIPSession.getFrom()+";"+currentSIPSession.getFromTag()+"\n";
 		ringingResponse += "To: <"+currentSIPSession.getTo()+">\n";
 		ringingResponse += currentSIPSession.getCallID()+"\n";
-		ringingResponse += currentSIPSession.getCSeq()+"\n";
+		ringingResponse += currentSIPSession.getCSeq()+" "+currentSIPSession.getCSeqAttribute()+"\n";
 		ringingResponse += currentSIPSession.getContact()+"\n";
 		ringingResponse += currentSIPSession.getUserAgent()+"\n";
 		ringingResponse += "Content-Length: 0\n";
 
-		System.out.println("<< RINGING response created = \n"+ ringingResponse);
+		System.out.println("\n<< RINGING response created = \n\n"+ ringingResponse);
 		return ringingResponse;
 		
 	}
@@ -105,7 +105,7 @@ public class SIPRequestHandler {
 		okMessage += currentSIPSession.getUserAgent()+"\n";
 		okMessage += "Content-Length: 0\n";
 
-		System.out.println("<< OK response created = \n"+ okMessage);
+		System.out.println("\n<< OK response created = \n\n"+ okMessage);
 		return okMessage; 
 	}
 
