@@ -58,6 +58,7 @@ public class SIPRequestHandler {
 				System.out.println("<< Gathered info from USER-AGENT string");
 			} else if(inputString.startsWith("Content-Length:")){
 				currentSIPSession.setContentLength(inputString.split(" ")[1]);
+				System.out.println("<< Gathered info from CONTENT-LENGTH string");
 			} else if(inputString.startsWith("o=")){
 				currentSIPSession.setOwner(inputString);
 			} else if(inputString.startsWith("c=")){
@@ -125,7 +126,6 @@ public class SIPRequestHandler {
 		okMessage += "a=fmtp:101 0-11\n";
 		
 		System.out.println("\n<< OK response created = \n\n"+ okMessage);
-		secondTemporaryString = null;
 		return okMessage; 
 	}
 
