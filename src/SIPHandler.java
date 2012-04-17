@@ -41,22 +41,26 @@ public class SIPHandler extends Thread{
 
 			sendPacket = new DatagramPacket(okMessage.getBytes(), okMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
 
-			try {socket.send(sendPacket);} 
-			catch (IOException e) 
+			try {
+				
+				socket.send(sendPacket);
+				/* Wait and send wav */
+
+				try {Thread.sleep(5000);} 
+				catch (InterruptedException e1) 
+				{e1.printStackTrace();}
+
+				
+				/* Send Bye msg */
+				String byeMessage = handler.byeMessage();
+				DatagramPacket byePacket = new DatagramPacket(byeMessage.getBytes(), byeMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
+				try {socket.send(byePacket);} 
+				catch (IOException e) 
+				{e.printStackTrace();}
+			
+			}catch (IOException e) 
 			{e.printStackTrace();}
 
-		}else if (inputData.startsWith("ACK")){
-			String byeMessage = handler.byeMessage();
-			
-			try {Thread.sleep(5000);} 
-			catch (InterruptedException e1) 
-			{e1.printStackTrace();}
-			
-			DatagramPacket sendPacket = new DatagramPacket(byeMessage.getBytes(), byeMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
-
-			try {socket.send(sendPacket);} 
-			catch (IOException e) 
-			{e.printStackTrace();}
 		}
 	}
 }
