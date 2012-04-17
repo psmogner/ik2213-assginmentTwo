@@ -1,7 +1,8 @@
+//BASIC CHECK
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-
 
 public class SIPHandler extends Thread{
 	private DatagramPacket receivePacket;
@@ -42,25 +43,24 @@ public class SIPHandler extends Thread{
 			sendPacket = new DatagramPacket(okMessage.getBytes(), okMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
 
 			try {
-				
+
 				socket.send(sendPacket);
 				/* Wait and send wav */
 
-				try {Thread.sleep(5000);} 
+				try {Thread.sleep(10000);}
 				catch (InterruptedException e1) 
 				{e1.printStackTrace();}
 
-				
 				/* Send Bye msg */
 				String byeMessage = handler.byeMessage();
 				DatagramPacket byePacket = new DatagramPacket(byeMessage.getBytes(), byeMessage.length(), receivePacket.getAddress(), receivePacket.getPort());
-				try {socket.send(byePacket);} 
+				try {socket.send(byePacket);
+				} 
 				catch (IOException e) 
 				{e.printStackTrace();}
-			
+
 			}catch (IOException e) 
 			{e.printStackTrace();}
-
 		}
 	}
 }

@@ -1,3 +1,4 @@
+//BASIC CHECK
 
 public class SIPRequestHandler {
 
@@ -162,7 +163,8 @@ public class SIPRequestHandler {
 	}
 
 	public String okMessage(){
-		
+
+		//=============================SDP=================================		
 		String SDP = "v=0" + CRLF
 				+ "o="+currentSIPSession.getSIPSpeekerUserName()+ " "+currentSIPSession.getSession()+" "+currentSIPSession.getSession()+" IN IP4 " +currentSIPSession.getSIPSpeekerIpAddress()+ CRLF
 				+ "s=Talk" + CRLF
@@ -179,7 +181,7 @@ public class SIPRequestHandler {
 				+ "a=fmtp:110 vbr=on" + CRLF
 				+ "a=rtpmap:101 telephone-event/8000" + CRLF
 				+ "a=fmtp:101 0-11" + CRLF;
-		
+
 		//=============================SIP=================================
 		okMessage = "SIP/2.0 200 OK" + CRLF
 				+currentSIPSession.getVia()+ CRLF 
@@ -191,16 +193,15 @@ public class SIPRequestHandler {
 				+ "Content-Type: " +currentSIPSession.getContentType()+ CRLF
 				+ "User-Agent: " +currentSIPSession.getUserAgent()+ CRLF
 				+ "Content-Length: "+ SDP.length() + CRLF + CRLF + SDP;
-				//=============================SDP=================================
-				
-
+		
 		System.out.println(CRLF+"<< 200 OK response created..." + CRLF + okMessage);
+		
 		return okMessage; 
 	}
 
 	public String byeMessage(){
 		byeMessage = "BYE " +currentSIPSession.getRequestingUserSIPName()+ " SIP/2.0" + CRLF
-				+currentSIPSession.getVia()
+				+currentSIPSession.getVia()+ CRLF
 				+ "From: <" +currentSIPSession.getSIPSpeekerSIPName()+ ">;tag=3516567874" + CRLF
 				+ "To: <" +currentSIPSession.getRequestingUserSIPName()+ ">;" +currentSIPSession.getRequestingUserTag()+ CRLF
 				+ "Call-ID: " +currentSIPSession.getCallID()+ CRLF
@@ -208,7 +209,10 @@ public class SIPRequestHandler {
 				+ "Contact: " +currentSIPSession.getContact().replace(":7070>", ">")+ CRLF
 				+ "Max-Forwards: " +currentSIPSession.getMaxForwards()+ CRLF
 				+ "User-Agent: " +currentSIPSession.getUserAgent()+ CRLF
-				+ "Content-Length: 0";
+				+ "Content-Length: 0" + CRLF + CRLF;
+
+		System.out.println(CRLF+"<< BYE response created..." + CRLF + byeMessage);
+
 		return byeMessage;
 	}
 }

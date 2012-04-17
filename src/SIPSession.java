@@ -1,7 +1,7 @@
+//BASIC CHECK
 
 public class SIPSession {
 
-	
 	private String SIPSpeekerSIPName;
 	private String SIPRequest;
 	private String SIPSpeekerUserName;
