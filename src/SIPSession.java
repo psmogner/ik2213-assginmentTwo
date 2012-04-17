@@ -1,161 +1,167 @@
 
 public class SIPSession {
 
-	private String status;
-	private String via;
-	private String from;
-	private String fromTag;
-	private String to;
+	
+	private String SIPSpeekerSIPName;
+	private String SIPRequest;
+	private String SIPSpeekerUserName;
+	private String SIPSpeekerIpAddress;
+	private String RequestingUserTag;
+	private String RequestingUserName;
+	private String RequestingUserSIPName;
+	private String RequestingUserIpAddress;
+	private String SIPSpeekerAlias;
 	private String CallID;
 	private String CSeq;
-	private String Contact;
-	private String ContentType;
-	private String allow;
-	private String userAgent;
 	private String CSeqAttribute;
-	private String contentLength;
-	private String Owner;
-	private String Connection;
+	private String Allow;
+	private String ContentType;
+	private String MaxForwards;
+	private String UserAgent;
+	private String Subject;
+	private String ContentLength;
 	private String TimeDescription;
 	private String MediaDescription;
-
-	public SIPSession(){
-		
+	private String Via;
+	private String Session;
+	private String Contact;
+	
+	public String getSIPSpeekerSIPName() {
+		return SIPSpeekerSIPName;
 	}
-
-	public String getStatus() {
-		return status;
+	public void setSIPSpeekerSIPName(String sIPSpeekerSIPName) {
+		SIPSpeekerSIPName = sIPSpeekerSIPName;
 	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public String getSIPRequest() {
+		return SIPRequest;
 	}
-
-	public String getVia() {
-		return via;
+	public void setSIPRequest(String sIPRequest) {
+		SIPRequest = sIPRequest;
 	}
-
-	public void setVia(String via) {
-		this.via = via;
+	public String getRequestingUserTag() {
+		return RequestingUserTag;
 	}
-
-	public String getFrom() {
-		return from;
+	public void setRequestingUserTag(String requestingUserTag) {
+		RequestingUserTag = requestingUserTag;
 	}
-
-	public void setFrom(String from) {
-		this.from = from;
+	public String getRequestingUserName() {
+		return RequestingUserName;
 	}
-
-	public String getTo() {
-		return to;
+	public void setRequestingUserName(String requestingUserName) {
+		RequestingUserName = requestingUserName;
 	}
-
-	public void setTo(String to) {
-		this.to = to;
+	public String getRequestingUserSIPName() {
+		return RequestingUserSIPName;
 	}
-
+	public void setRequestingUserSIPName(String requestingUserSIPName) {
+		RequestingUserSIPName = requestingUserSIPName;
+	}
+	public String getRequestingUserIpAddress() {
+		return RequestingUserIpAddress;
+	}
+	public void setRequestingUserIpAddress(String requestingUserIpAddress) {
+		RequestingUserIpAddress = requestingUserIpAddress;
+	}
+	public String getSIPSpeekerAlias() {
+		return SIPSpeekerAlias;
+	}
+	public void setSIPSpeekerAlias(String sIPSpeekerAlias) {
+		SIPSpeekerAlias = sIPSpeekerAlias;
+	}
 	public String getCallID() {
 		return CallID;
 	}
-
 	public void setCallID(String callID) {
 		CallID = callID;
 	}
-
 	public String getCSeq() {
 		return CSeq;
 	}
-
 	public void setCSeq(String cSeq) {
 		CSeq = cSeq;
 	}
-
-	public String getContact() {
-		return Contact;
-	}
-
-	public void setContact(String contact) {
-		Contact = contact;
-	}
-
-	public String getContentType() {
-		return ContentType;
-	}
-
-	public void setContentType(String contentType) {
-		ContentType = contentType;
-	}
-
-	public String getFromTag() {
-		return fromTag;
-	}
-
-	public void setFromTag(String fromTag) {
-		this.fromTag = fromTag;
-	}
-
-	public String getAllow() {
-		return allow;
-	}
-
-	public void setAllow(String allow) {
-		this.allow = allow;
-	}
-
-	public String getUserAgent() {
-		return userAgent;
-	}
-
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
-
 	public String getCSeqAttribute() {
 		return CSeqAttribute;
 	}
-
 	public void setCSeqAttribute(String cSeqAttribute) {
 		CSeqAttribute = cSeqAttribute;
 	}
-
+	public String getAllow() {
+		return Allow;
+	}
+	public void setAllow(String allow) {
+		Allow = allow;
+	}
+	public String getContentType() {
+		return ContentType;
+	}
+	public void setContentType(String contentType) {
+		ContentType = contentType;
+	}
+	public String getMaxForwards() {
+		return MaxForwards;
+	}
+	public void setMaxForwards(String maxForwards) {
+		MaxForwards = maxForwards;
+	}
+	public String getUserAgent() {
+		return UserAgent;
+	}
+	public void setUserAgent(String userAgent) {
+		UserAgent = userAgent;
+	}
+	public String getSubject() {
+		return Subject;
+	}
+	public void setSubject(String subject) {
+		Subject = subject;
+	}
 	public String getContentLength() {
-		return contentLength;
+		return ContentLength;
 	}
-
 	public void setContentLength(String contentLength) {
-		this.contentLength = contentLength;
+		ContentLength = contentLength;
 	}
-
-	public String getOwner() {
-		return Owner;
-	}
-
-	public void setOwner(String owner) {
-		Owner = owner;
-	}
-
-	public String getConnection() {
-		return Connection;
-	}
-
-	public void setConnection(String connection) {
-		Connection = connection;
-	}
-
 	public String getTimeDescription() {
 		return TimeDescription;
 	}
-
 	public void setTimeDescription(String timeDescription) {
 		TimeDescription = timeDescription;
 	}
-
 	public String getMediaDescription() {
 		return MediaDescription;
 	}
-
 	public void setMediaDescription(String mediaDescription) {
 		MediaDescription = mediaDescription;
+	}
+	public String getVia() {
+		return Via;
+	}
+	public void setVia(String via) {
+		Via = via;
+	}
+	public String getContact() {
+		return Contact;
+	}
+	public void setContact(String contact) {
+		Contact = contact;
+	}
+	public String getSIPSpeekerUserName() {
+		return SIPSpeekerUserName;
+	}
+	public void setSIPSpeekerUserName(String sIPSpeekerUserName) {
+		SIPSpeekerUserName = sIPSpeekerUserName;
+	}
+	public String getSIPSpeekerIpAddress() {
+		return SIPSpeekerIpAddress;
+	}
+	public void setSIPSpeekerIpAddress(String sIPSpeekerIpAddress) {
+		SIPSpeekerIpAddress = sIPSpeekerIpAddress;
+	}
+	public String getSession() {
+		return Session;
+	}
+	public void setSession(String session) {
+		Session = session;
 	}
 }
