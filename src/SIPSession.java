@@ -25,6 +25,47 @@ public class SIPSession {
 	private String Via;
 	private String Session;
 	private String Contact;
+	private String messageText;
+	private String sipUser;
+	private String sipHost = "127.0.0.1"; 
+	private int sipPort = 5060;
+	private String sipUri;
+	private String configFileName;
+	private String DefaultMessage;
+	private String CurrentMessage;
+	private String MessageRecieved;
+
+
+	public String getConfigFileName() {
+		return configFileName;
+	}
+	public void setConfigFileName(String configFileName) {
+		this.configFileName = configFileName;
+	}
+	public String getSipUser() {
+		return sipUser;
+	}
+	public void setSipUser(String sipUser) {
+		this.sipUser = sipUser;
+	}
+	public String getSipHost() {
+		return sipHost;
+	}
+	public void setSipHost(String sipHost) {
+		this.sipHost = sipHost;
+	}
+	public int getSipPort() {
+		return sipPort;
+	}
+	public void setSipPort(int sipPort) {
+		this.sipPort = sipPort;
+	}
+	public String getSipUri() {
+		return sipUri;
+	}
+	public void setSipUri(String sipUri) {
+		this.sipUri = sipUri;
+	}
 	
 	public String getSIPSpeekerSIPName() {
 		return SIPSpeekerSIPName;
@@ -164,4 +205,29 @@ public class SIPSession {
 	public void setSession(String session) {
 		Session = session;
 	}
+	public String getMessageText() {
+		return messageText;
+	}
+	public void setMessageText(String messageText) {
+		this.messageText = messageText;
+	}
+	public String getDefaultMessage() {
+		return DefaultMessage;
+	}
+	public void setDefaultMessage(String defaultMessage) {
+		DefaultMessage = defaultMessage;
+	}
+	public String getCurrentMessage() {
+		return CurrentMessage;
+	}
+	public void setCurrentMessage(String currentMessage) {
+		CurrentMessage = currentMessage;
+	}
+	public String getMessageRecieved() {
+		return MessageRecieved;
+	}
+	public void setMessageRecieved(String messageRecieved) {
+		MessageRecieved = messageRecieved;
+	}
+
 }
