@@ -62,10 +62,11 @@ public class SIPHandler extends Thread{
 				/* Medialocator is the destination of the datasink*/
 
 				socket.send(sendPacket);
+				SIPSession wierdSessionInfo = handler.getSessionInfo();
 				RTPSender newRTPSender = null;			
 				try {
 					try {
-						newRTPSender = new RTPSender(newSIPSession.getRequestingUserIpAddress(), 7078);
+						newRTPSender = new RTPSender(wierdSessionInfo.getRequestingUserIpAddress(), 7078);
 					} catch (InvalidSessionAddressException e) {
 						e.printStackTrace();
 					} catch (UnsupportedFormatException e) {
@@ -79,12 +80,14 @@ public class SIPHandler extends Thread{
 					e2.printStackTrace();}
 
 				newRTPSender.startRTP();
+				System.out.println("Starting stream.");
 
 				try {
-					Thread.sleep(newRTPSender.getFileLengthInSeconds()+5000);
+					Thread.sleep(newRTPSender.getFileLengthInSeconds()+1000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();}
 
+				System.out.println("Stoping stream.");
 				newRTPSender.stopRTP();
 				
 				String byeMessage = handler.byeMessage();

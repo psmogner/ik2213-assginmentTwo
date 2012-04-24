@@ -146,6 +146,10 @@ public class SIPRequestHandler {
 		return "";
 	}
 
+	public SIPSession getSessionInfo(){
+		return newSIPSession;
+	}
+	
 	public String RingingResponse(){
 		//=============================SIP=================================
 		ringingResponse = "SIP/2.0 180 Ringing" + CRLF

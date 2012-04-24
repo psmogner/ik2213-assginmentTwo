@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Hashtable;
 import java.util.Properties;
 
 public class SIPSpeaker extends Thread{
@@ -44,7 +47,6 @@ public class SIPSpeaker extends Thread{
 						newSIPSession.setSipHost(sipHost.split(":")[0]);
 						newSIPSession.setSipPort(Integer.parseInt(sipHost.split(":")[1]));
 					}
-					// Can use newSIPSession.setSipUri(args[i+1]) instead...
 					newSIPSession.setSipUri(newSIPSession.getSipUser()+"@"+newSIPSession.getSipHost()+":"+newSIPSession.getSipPort());
 					System.out.println("The name of the new sip uri is: " +newSIPSession.getSipUri());
 				}
@@ -89,7 +91,7 @@ public class SIPSpeaker extends Thread{
 
 	public static void readOrWriteConfig(String nameOfConfigurationFile, SIPSession newSIPSession, TCPSession newTCPSession, VoiceCreator newVoiceMessage) throws FileNotFoundException, IOException{
 		Properties configArguments = new Properties();
-
+		String hostname = "";
 		try {
 			configArguments.load(new FileInputStream(nameOfConfigurationFile));
 		} catch (FileNotFoundException e) {
@@ -107,7 +109,16 @@ public class SIPSpeaker extends Thread{
 		newSIPSession.setSipPort(Integer.parseInt(configArguments.getProperty("sip_port")));
 		newSIPSession.setSipUser(configArguments.getProperty("sip_user"));
 		newSIPSession.setSipHost(configArguments.getProperty("sip_interface"));
+		
+		try {
+		    InetAddress addr = InetAddress.getLocalHost();
+		    hostname = addr.toString();
+		} catch (UnknownHostException e) {
+		}
+		System.out.println(hostname);
+		newSIPSession.setSipHost(hostname.split("/")[1]);
 		newSIPSession.setSipUri(newSIPSession.getSipUser()+"@"+newSIPSession.getSipHost()+":"+newSIPSession.getSipPort());
+		System.out.println("SIPURI: "+newSIPSession.getSipUri());
 		
 		//================================================================================
 		newTCPSession.setHTTPInterface(configArguments.getProperty("http_interface"));

@@ -28,8 +28,12 @@ public class ProtocolHandler {
 			}else if(inputString.startsWith("POST")){
 				Request = "POST";
 			}else if(inputString.startsWith("message=")){
-				inputString = inputString.replace("+", " ");
-				newMessageText = inputString.split("=")[1];
+				if(inputString.contains("=Delete")){
+					newMessageText = "Welcome to the SIP Speaker this is my own answering machine. You have no new messages.";
+				} else {
+					inputString = inputString.replace("+", " ");
+					newMessageText = inputString.split("=")[1];
+				}
 			}
 		}
 		return "";

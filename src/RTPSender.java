@@ -86,10 +86,12 @@ public class RTPSender {
 	/* Method for starting and stopping RTP transmission */
 	public void startRTP() throws IOException{
 		sendStream.start();
+		
 	}
 	
 	public void stopRTP() throws IOException{
 		sendStream.stop();
+		
 	}
 	
 	public long getFileLengthInSeconds(){
